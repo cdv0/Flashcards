@@ -1,0 +1,572 @@
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f3f4f6; 
+  color: #111827;     
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* NavBar */
+
+.navbar {
+  width: 100%;
+  background: #ffffff;
+  color: #111827;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.navbar-inner {
+  margin: 0 auto;
+  padding: 0.75rem 4rem;
+
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+
+
+.nav-left {
+  flex: 0 0 auto;    
+}
+
+.nav-logo {
+  width: 36px;
+  height: 36px;
+
+  display: flex;    
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+
+.nav-center {
+  flex: 1 1 auto;    
+  display: flex;
+  justify-content: center;
+}
+
+.nav-search-wrapper {
+  width: 100%;
+  max-width: 600px;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-search-icon {
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+.nav-search-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 1rem;
+  background: transparent;
+}
+
+.nav-right {
+  flex: 0 0 auto;         
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2563eb;
+  cursor: pointer;
+}
+
+.nav-btn:hover {
+  text-decoration: underline;
+}
+
+.profile-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #9ca3af;
+}
+
+
+/*  Layout Containers */
+
+/* Main page container (matches Figma wide desktop layout) */
+.page-container {
+  max-width: 1700px;    /* wide desktop content width */
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Optional generic container if needed elsewhere */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+}
+
+
+.flashcards-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.flashcards-header h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-search {
+  padding: 0.6rem 1rem;
+  width: 260px;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  font-size: 1rem;
+  background: white;
+}
+
+/* Header action buttons */
+.header-btn {
+  padding: 0.55rem 1rem;
+  font-size: 0.95rem;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  cursor: pointer;
+  background: white;
+}
+
+.add-section-btn:hover {
+  background: #f3f4f6;
+}
+
+.create-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+}
+
+.create-btn:hover {
+  background: #1d4ed8;
+}
+
+
+.flashcard-section {
+  margin-top: 2rem;
+}
+
+.section-title {
+  background: #d1d5db;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+/* Card grid stays the same */
+.flashcard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.2rem;
+}
+
+/* Card is a flex column so footer stays at the bottom */
+.flashcard-card {
+  background: #ffffff;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  min-height: 170px; /* adjust as you like */
+}
+
+/* Header row: title + 3-dot button */
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.card-title {
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+/* 3-dot card menu button */
+.card-menu-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: #6b7280;
+  padding: 0 0.1rem;
+}
+
+.card-menu-btn:hover {
+  color: #111827;
+}
+
+/* Description takes remaining vertical space */
+.card-desc {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin: 0 0 0.75rem;
+  flex: 1 1 auto; /* THIS keeps footer at bottom */
+}
+
+/* Footer pinned at bottom */
+.card-footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* "X terms" pill */
+.terms-btn {
+  padding: 0.35rem 0.75rem;
+  background: #dbeafe;
+  color: #1d4ed8;
+  border: none;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+
+.placeholder {
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* =========================================
+   Add Section Modal
+   ========================================= */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-backdrop.is-hidden {
+  display: none;
+}
+
+.modal {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 2rem 2.5rem;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
+}
+
+.modal-header h2 {
+  margin: 0 0 1.5rem;
+  font-size: 1.6rem;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Field layout */
+
+.modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.modal-field-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.modal-label {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.char-count {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* Input */
+
+.modal-input {
+  padding: 0.8rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  font-size: 1rem;
+}
+
+/* Color picker */
+
+.color-picker {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.25rem;
+}
+
+.color-dot {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.color-dot.is-selected {
+  border-color: #111827;
+}
+
+/* Footer buttons */
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.modal-btn {
+  border: none;
+  background: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  color: #6b7280;
+}
+
+.primary-btn {
+  padding: 0.55rem 1.4rem;
+  border-radius: 12px;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.primary-btn:hover {
+  background: #1d4ed8;
+}
+
+
+
+
+/* Section title bar now contains text + menu button */
+.section-title {
+  background: #d1d5db;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Three-dot button on the right */
+.section-menu-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #374151;
+  padding: 0 0.25rem;
+}
+
+.section-menu-btn:hover {
+  color: #111827;
+}
+
+/* Popup menu */
+
+.section-menu {
+  position: absolute;
+  min-width: 180px;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 15px 30px rgba(15, 23, 42, 0.25);
+  padding: 0.25rem 0;
+  z-index: 1100;
+}
+
+.section-menu.is-hidden {
+  display: none;
+}
+
+.section-menu button {
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  border: none;
+  background: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.section-menu button:hover {
+  background: #f3f4f6;
+}
+
+
+
+/* ==========================
+   Card options menu
+   ========================== */
+
+.card-menu {
+  position: absolute;
+  min-width: 190px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 15px 30px rgba(15, 23, 42, 0.25);
+  padding: 0.35rem 0;
+  z-index: 1200;
+}
+
+.card-menu.is-hidden {
+  display: none;
+}
+
+.card-menu-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 0.25rem 0;
+}
+
+.card-menu-item {
+  width: 100%;
+  text-align: left;
+  padding: 0.55rem 1rem;
+  border: none;
+  background: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.card-menu-item-strong {
+  font-weight: 600;
+}
+
+.card-menu-item-danger {
+  color: #b91c1c;
+}
+
+.card-menu-item:hover {
+  background: #f3f4f6;
+}
+
+
+
+
+
+/* Textarea in create-set modal */
+.modal-textarea {
+  width: 100%;
+  min-height: 90px;
+  padding: 0.8rem 1.1rem;
+  border-radius: 18px;
+  border: 1px solid #d1d5db;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+/* Section dropdown */
+.modal-select {
+  width: 100%;
+  padding: 0.6rem 1.1rem;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  font-size: 0.95rem;
+  background: #ffffff;
+}
+
+/* Checkbox row */
+.modal-checkbox-row {
+  margin-top: 0.5rem;
+}
+
+.checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+

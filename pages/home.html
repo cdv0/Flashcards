@@ -1,11 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <title>FlashLearn – Home</title>
+  <link rel="stylesheet" href="../styles/main.css" />
 </head>
+
 <body>
+  <!-- Navbar -->
+  <div id="navbar-root"></div>
+
+  <!-- Page Container -->
+  <main class="page-container">
+
+    <!-- === Header Row === -->
+    <section class="flashcards-header">
+      <h1>Your Flashcards</h1>
+
+      <!-- Right-side group (search + buttons) -->
+      <div class="header-controls">
+
+        <input 
+          type="text" 
+          class="header-search" 
+          placeholder="Search your flashcards"
+        />
+
+        <button class="header-btn add-section-btn">Add section</button>
+         <div id="addSectionModal" class="modal-backdrop is-hidden">
+    <div class="modal">
+
+      <div class="modal-header">
+        <h2>Add section</h2>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- Section title field -->
+        <div class="modal-field">
+          <div class="modal-field-label-row">
+            <label for="sectionTitle" class="modal-label">Section title</label>
+            <span id="sectionTitleCount" class="char-count">0/50</span>
+          </div>
+          <input
+            type="text"
+            id="sectionTitle"
+            class="modal-input"
+            placeholder="Type here"
+            maxlength="50"
+          />
+        </div>
+
+        <!-- Color picker -->
+        <div class="modal-field">
+          <label class="modal-label">Select color</label>
+          <div class="color-picker">
+            <!-- Each dot has a data-color; first is selected by default -->
+            <button class="color-dot is-selected" data-color="#f97373" style="background-color:#f97373;"></button>
+            <button class="color-dot" data-color="#fdba74" style="background-color:#fdba74;"></button>
+            <button class="color-dot" data-color="#facc15" style="background-color:#facc15;"></button>
+            <button class="color-dot" data-color="#4ade80" style="background-color:#4ade80;"></button>
+            <button class="color-dot" data-color="#93c5fd" style="background-color:#93c5fd;"></button>
+            <button class="color-dot" data-color="#f9a8d4" style="background-color:#f9a8d4;"></button>
+            <button class="color-dot" data-color="#a855f7" style="background-color:#a855f7;"></button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="modal-btn cancel-btn">Cancel</button>
+        <button type="button" class="modal-btn primary-btn" id="confirmAddSectionBtn">
+          Add
+        </button>
+      </div>
+
+    </div>
+  </div>
+        <button class="header-btn create-btn">+ Create</button>
+
+      </div>
+    </section>
+
+    <!-- === Unassigned Flashcards Section === -->
+    <section class="flashcard-section" data-section-id="unassigned">
+      <div class="section-title">Unassigned Flashcards</div>
+      <div class="flashcard-grid">
+
+        <div class="flashcard-card">
+          <h3 class="card-title">CECS 456 Final</h3>
+ 
+          <p class="card-desc">Study guide for Machine Learning final on December 16, 2025.</p>
+          <button class="terms-btn">20 terms</button>
+          
+        </div>
+
+      </div>
+    </section>
+
+  <div id="createSetModal" class="modal-backdrop is-hidden">
+    <div class="modal">
+
+      <div class="modal-header">
+        <h2>Create flashcard set</h2>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- Title field -->
+        <div class="modal-field">
+          <div class="modal-field-label-row">
+            <label for="setTitle" class="modal-label">Title</label>
+            <span id="setTitleCount" class="char-count">0/50</span>
+          </div>
+          <input
+            type="text"
+            id="setTitle"
+            class="modal-input"
+            placeholder="Type here"
+            maxlength="50"
+          />
+        </div>
+
+        <!-- Description field -->
+        <div class="modal-field">
+          <div class="modal-field-label-row">
+            <label for="setDescription" class="modal-label">Description</label>
+            <span id="setDescCount" class="char-count">0/200</span>
+          </div>
+          <textarea
+            id="setDescription"
+            class="modal-textarea"
+            placeholder="Type here"
+            maxlength="200"
+          ></textarea>
+        </div>
+
+        <!-- Assign to section -->
+        <div class="modal-field">
+          <label for="setSectionSelect" class="modal-label">
+            Assign to section (optional)
+          </label>
+          <select id="setSectionSelect" class="modal-select">
+            <!-- JS will populate: Unassigned + other sections -->
+          </select>
+        </div>
+
+        <!-- Make public -->
+        <div class="modal-field modal-checkbox-row">
+          <label class="checkbox-label">
+            <input type="checkbox" id="setMakePublic" />
+            <span>Make public</span>
+          </label>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="modal-btn cancel-btn" id="cancelCreateSetBtn">
+          Cancel
+        </button>
+        <button type="button" class="modal-btn primary-btn" id="confirmCreateSetBtn">
+          Create
+        </button>
+      </div>
+
+    </div>
+  </div>
     
+  </main>
+
+  <script src="../scripts/navbar.js"></script>
+  <script type="module" src="../scripts/home.js"></script>
 </body>
 </html>
