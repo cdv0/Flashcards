@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Add Flashcards</title>
+        <link rel="stylesheet" href="/styles/add_cards_set.css"/>
+    </head>
+
+    <body>
+        <div class="page">
+
+            <!-- Header -->
+             <header class="topbar">
+                <h2>Add flashcards to <span style="color: black; text-decoration: underline; font-weight: 600;">CECS 448 Midterm 2</span></h2>
+
+                <div class="top-right">
+                    <button class="cancel-btn">Cancel</button>
+                    <button class="create-btn">Create</button>
+                </div>
+             </header>
+
+             <!-- Editor Section -->
+            <section class="editor">
+                <h3>Editor</h3>
+
+                <div class="card-box">
+                    <div class="row">
+                        <div class="field">
+                            <label>Term</label>
+                            <div class="format-bar">
+                                <button class="format-btn bold-btn"><b>B</b></button>
+                                <button class="format-btn italic-btn"><i>I</i></button>
+                                <button class="format-btn underline-btn"><u>U</u></button>
+                                <button>𝛬</button><button>◇</button><button>A</button>
+                                <button class="gray">Equation</button>
+                                <button class="gray">Code block</button>
+                            </div>
+                            <input id="termInput" placeholder="Type here" />
+                        </div>
+
+                        <div class="field">
+                            <label>Definition</label>
+                            <div class="format-bar">
+                                <button class="format-btn bold-btn"><b>B</b></button>
+                                <button class="format-btn italic-btn"><i>I</i></button>
+                                <button class="format-btn underline-btn"><u>U</u></button>
+                                <button>𝛬</button><button>◇</button><button>A</button>
+                                <button class="gray">Equation</button>
+                                <button class="gray">Code block</button>
+                            </div>
+                            <input id="defInput" placeholder="Type here" />
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button class="slear-btn" id="clear">Clear</button>
+                        <button class="add-btn" id="addCard">+ Add card</button>
+                    </div>
+                </div>
+              </section>
+
+              <!-- Saved Terms Section -->
+               <section class="terms">
+                <h3>
+                    Terms in this set
+                    <span id="termCount" class="badge">0 terms</span>
+                </h3>
+
+                <div id="termsList"></div>
+            </section>
+        </div>
+        <script src="/scripts/add_cards_set.js" defer></script>
+    </body>
+</html>
