@@ -1,0 +1,288 @@
+/* ========= GLOBAL ========= */
+
+body {
+  margin: 0;
+  background: #f7f7f8;
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", Arial, sans-serif;
+  color: #111;
+}
+
+.page {
+  width: 100%;
+  max-width: 960px;
+  margin: auto;
+  padding: 28px;
+}
+
+/* ========= HEADER ========= */
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 18px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.topbar h2 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.topbar a {
+  color: #0055cc;
+}
+
+.top-right {
+  display: flex;
+  gap: 15px;
+}
+
+.cancel-btn {
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.create-btn {
+  background: #4a82f9;
+  color: white;
+  font-size: 15px;
+  padding: 7px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+/* ========= EDITOR BOX ========= */
+
+.editor .card-box {
+  background: white;
+  border-radius: 14px;
+  padding: 24px 26px;
+  box-shadow: 0 2px 7px rgba(0,0,0,0.06);
+  margin-top: 14px;
+}
+
+h3 {
+  margin: 15px 0 12px;
+}
+
+.row {
+  display: flex;
+  gap: 36px;
+}
+
+.field {
+  flex: 1;
+}
+
+.field label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.field textarea,
+.field input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+/* ========= FORMAT BAR ========= */
+
+.format-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.format-bar button {
+  background: none;
+  border: none;
+  font-size: 13px;
+  padding: 4px 6px;
+  cursor: pointer;
+  color: #444;
+}
+
+.format-bar .gray {
+  background: #e9e9ec;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #333;
+}
+
+.format-btn {
+    background: #f2f2f2;
+    border: 1px solid #d0d0d0;
+    padding: 4px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.bold-btn b {
+    font-weight: 700;        /* Ensures bold B */
+}
+
+.italic-btn i {
+    font-style: italic;      /* Ensures italic I */
+}
+
+.underline-btn u {
+    text-decoration: underline; /* Ensures underlined U */
+}
+
+.format-btn:hover {
+    background: #e0e0e0;
+}
+
+/* ========= INPUTS ========= */
+
+input {
+  width: 100%;
+  height: 40px;
+  padding: 8px 15px;
+  border: 1px solid #d4d4d7;
+  border-radius: 20px;
+  outline: none;
+  font-size: 14px;
+}
+
+input:focus {
+  border-color: #8ab4ff;
+  box-shadow: 0 0 0 3px rgba(138, 180, 255, 0.3);
+}
+
+/* ========= CLEAR + ADD BUTTONS ========= */
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  gap: 12px;
+}
+
+.clear-btn {
+  background: none;
+  border: 1px solid #ccc;
+  padding: 7px 16px;
+  border-radius: 7px;
+  cursor: pointer;
+  color: #555;
+}
+
+.add-btn {
+  background: #4a82f9;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+/* ========= TERMS SECTION ========= */
+
+.terms {
+  margin-top: 40px;
+}
+
+.badge {
+  background: #dce6ff;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  margin-left: 10px;
+}
+
+/* ========= SAVED TERM CARDS ========= */
+.term-card {
+    background: white;
+    border-radius: 14px;
+    padding: 24px 26px;
+    box-shadow: 0 2px 7px rgba(0,0,0,0.06);
+    border: 1px solid #e5e5e5;
+    margin-top: 18px;
+}
+
+.term-card .row {
+    display: flex;
+    gap: 36px;
+    margin-top: 20px;
+}
+
+.term-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.term-number {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.mini-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #6f6f6f;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.term-input,
+.definition-input {
+    width: 100%;
+    padding: 11px;
+    font-size: 15px;
+    border-radius: 10px;
+    border: 1px solid #d4d4d4;
+    background: #fafafa;
+}
+
+textarea,
+.definition-input {
+    font-family: inherit;
+    font-size: 15px;
+    line-height: 1.4;
+    height: 85px;
+    resize: vertical;
+}
+
+.delete-btn {
+  color: #bb3030;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.drag-btn {
+  cursor: grab;
+  font-size: 20px;
+  color: #777;
+  margin-left: 8px;
+}
+
+.term-fields {
+  margin-top: 15px;
+}
+
+.term-fields .field {
+  margin-bottom: 16px;
+}
+
+#termsList {
+    min-height: 100px;
+}
+
