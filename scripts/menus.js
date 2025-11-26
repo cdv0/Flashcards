@@ -1,4 +1,4 @@
-// scripts/menus.js
+
 import { getSections, syncSectionsFromDOM, refreshSectionSelect } from './state.js';
 import { moveCardToSection } from './sections.js';
 

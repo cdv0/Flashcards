@@ -1,4 +1,3 @@
-// scripts/state.js
 
 let sections = [];
 

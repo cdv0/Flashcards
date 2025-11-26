@@ -1,4 +1,4 @@
-// scripts/home.js
+
 import { syncSectionsFromDOM, refreshSectionSelect } from './state.js';
 import { setupAddSectionModal } from './addSectionModal.js';
 import { setupCreateSetModal } from './createSetModal.js';

@@ -1,4 +1,4 @@
-// scripts/createSetModal.js
+
 import { refreshSectionSelect } from './state.js';
 
 export function setupCreateSetModal() {

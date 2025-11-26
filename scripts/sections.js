@@ -1,4 +1,4 @@
-// scripts/sections.js
+
 import { syncSectionsFromDOM, refreshSectionSelect } from './state.js';
 
 export function createSection(title, color) {

@@ -1,4 +1,4 @@
-// scripts/addSectionModal.js
+
 import { createSection } from './sections.js';
 
 export function setupAddSectionModal() {
