@@ -132,14 +132,12 @@ button {
 
 /*  Layout Containers */
 
-/* Main page container (matches Figma wide desktop layout) */
 .page-container {
-  max-width: 1700px;    /* wide desktop content width */
+  max-width: 1600px;    
   margin: 0 auto;
   padding: 2rem;
 }
 
-/* Optional generic container if needed elsewhere */
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -219,19 +217,18 @@ button {
   gap: 1.2rem;
 }
 
-/* Card is a flex column so footer stays at the bottom */
 .flashcard-card {
   background: #ffffff;
   padding: 1rem;
   border-radius: 10px;
   border: 1px solid #e5e7eb;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+
   display: flex;
   flex-direction: column;
-  min-height: 170px; /* adjust as you like */
+  min-height: 170px;     
 }
 
-/* Header row: title + 3-dot button */
 .card-header {
   display: flex;
   align-items: flex-start;
@@ -245,38 +242,43 @@ button {
   margin: 0;
 }
 
-/* 3-dot card menu button */
-.card-menu-btn {
-  border: none;
-  background: none;
-  cursor: pointer;
-  font-size: 1.1rem;
-  line-height: 1;
-  color: #6b7280;
-  padding: 0 0.1rem;
-}
-
-.card-menu-btn:hover {
-  color: #111827;
-}
-
-/* Description takes remaining vertical space */
 .card-desc {
   font-size: 0.9rem;
   color: #4b5563;
   margin: 0 0 0.75rem;
-  flex: 1 1 auto; /* THIS keeps footer at bottom */
+  flex: 1 1 auto;         
 }
 
-/* Footer pinned at bottom */
 .card-footer {
   margin-top: auto;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  gap: 0.5rem;
 }
 
-/* "X terms" pill */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  border: none;
+  cursor: default;
+  white-space: nowrap;   
+}
+
+/* Specific styles */
+.pill-terms {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.pill-public {
+  background: #e5e7eb;
+  color: #374151;
+}
+
 .terms-btn {
   padding: 0.35rem 0.75rem;
   background: #dbeafe;
@@ -440,7 +442,7 @@ button {
   background: none;
   cursor: pointer;
   font-size: 1.2rem;
-  color: #374151;
+  /* color: #374151; */
   padding: 0 0.25rem;
 }
 
@@ -484,6 +486,22 @@ button {
 /* ==========================
    Card options menu
    ========================== */
+
+.card-menu-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #6b7280; 
+  padding: 4px;
+  border-radius: 6px;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.card-menu-btn:hover {
+  color: #111827;         
+  background-color: #f3f4f6; 
+}
 
 .card-menu {
   position: absolute;
@@ -530,9 +548,6 @@ button {
 
 
 
-
-
-/* Textarea in create-set modal */
 .modal-textarea {
   width: 100%;
   min-height: 90px;

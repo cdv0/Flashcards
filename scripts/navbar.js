@@ -1,4 +1,3 @@
-// scripts/navbar.js
 
 document.addEventListener('DOMContentLoaded', () => {
   const navbarRoot = document.getElementById('navbar-root');

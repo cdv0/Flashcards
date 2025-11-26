@@ -22,6 +22,7 @@ export function setupCreateSetModal() {
     titleCount.textContent = '0/50';
     descCount.textContent = '0/200';
     publicCheckbox.checked = false;
+
     refreshSectionSelect();
     titleInput.focus();
   }
@@ -49,7 +50,7 @@ export function setupCreateSetModal() {
     const title = titleInput.value.trim();
     const description = descInput.value.trim();
     const sectionId = sectionSelect.value || 'unassigned';
-    const makePublic = publicCheckbox.checked; // stored if you want later
+    const makePublic = publicCheckbox.checked;
 
     if (!title) {
       alert('Please enter a title.');
@@ -61,25 +62,18 @@ export function setupCreateSetModal() {
   });
 }
 
-export function createFlashcardSet({ title, description, sectionId }) {
+export function createFlashcardSet({ title, description, sectionId, makePublic, termCount = 0 }) {
   const targetSection =
-    document.querySelector(
-      `.flashcard-section[data-section-id="${sectionId}"]`
-    ) ||
-    document.querySelector(
-      '.flashcard-section[data-section-id="unassigned"]'
-    );
+    document.querySelector(`.flashcard-section[data-section-id="${sectionId}"]`) ||
+    document.querySelector('.flashcard-section[data-section-id="unassigned"]');
 
   if (!targetSection) return;
 
   const grid = targetSection.querySelector('.flashcard-grid');
-  if (!grid) return;
 
   const card = document.createElement('div');
   card.className = 'flashcard-card';
-  card.dataset.setId = `set-${Date.now()}-${Math.random()
-    .toString(36)
-    .slice(2, 7)}`;
+  card.dataset.setId = `set-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
 
   const header = document.createElement('div');
   header.className = 'card-header';
@@ -89,30 +83,44 @@ export function createFlashcardSet({ title, description, sectionId }) {
   h3.textContent = title;
 
   const menuBtn = document.createElement('button');
-  menuBtn.type = 'button';
   menuBtn.className = 'card-menu-btn';
-  menuBtn.setAttribute('aria-label', 'Set options');
-  menuBtn.innerHTML = '⋮';
+  menuBtn.textContent = '⋮';
 
   header.appendChild(h3);
   header.appendChild(menuBtn);
 
   const p = document.createElement('p');
   p.className = 'card-desc';
-  p.textContent = description || 'No description provided.';
+  p.textContent = description;
+
 
   const footer = document.createElement('div');
   footer.className = 'card-footer';
 
-  const termsBtn = document.createElement('button');
-  termsBtn.className = 'terms-btn';
-  termsBtn.textContent = '0 terms';
+  const termsPill = document.createElement('button');
+  termsPill.className = 'pill pill-terms';
+  termsPill.textContent = `${termCount} terms`;
 
-  footer.appendChild(termsBtn);
+  footer.appendChild(termsPill);
 
+  if (makePublic) {
+    const publicPill = document.createElement('span');
+    publicPill.className = 'pill pill-public';
+    publicPill.textContent = 'Public';
+    footer.appendChild(publicPill);
+  }
+  else {
+    const publicPill = document.createElement('span');
+    publicPill.className = 'pill pill-public';
+    publicPill.textContent = 'Private';
+    footer.appendChild(publicPill);
+  }
+
+  
   card.appendChild(header);
   card.appendChild(p);
   card.appendChild(footer);
 
   grid.appendChild(card);
 }
+
