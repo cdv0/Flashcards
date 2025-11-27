@@ -57,6 +57,46 @@ body {
   cursor: pointer;
 }
 
+/* ===== SUCCESS POPUP ===== */
+
+.success-popup {
+  position: fixed;
+  top: 95px;
+  right: 40px;
+  background: #e7f7e7;
+  border: 2px solid #2f9e44;
+  padding: 14px 18px;
+  width: 400px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: 0.35s ease;
+  font-size: 15px;
+  z-index: 50;
+}
+
+
+.success-popup.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.success-popup .icon {
+  font-size: 22px;
+  color: #2f9e44;
+  margin-top: 2px;
+}
+
+.success-popup .text strong {
+  font-weight: 600;
+}
+
 /* ========= EDITOR BOX ========= */
 
 .editor .card-box {
