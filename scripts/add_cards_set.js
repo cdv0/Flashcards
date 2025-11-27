@@ -83,6 +83,20 @@ function renderList() {
     });
 }
 
+/* Success */
+function showSuccess(message) {
+    const popup = document.getElementById("successPopup");
+    const msg = document.getElementById("successMsg");
+
+    msg.textContent = message;
+
+    popup.classList.add("show");
+
+    setTimeout(() => {
+        popup.classList.remove("show");
+    }, 3000);
+}
+
 /* Add card */
 addBtn.onclick = () => {
     const term = termInput.value.trim();
@@ -93,13 +107,16 @@ addBtn.onclick = () => {
         return;
     }
 
-terms.push({
-    id: id++,
-    term,
-    definition: def
-});
+    terms.push({
+        id: id++,
+        term,
+        definition: def
+    });
 
-renderList();
+    renderList();
+
+    showSuccess(`Added term ${term} to flashcard set CECS 448 Midterm 2`);
+    
     termInput.value = "";
     defInput.value = "";
 };
