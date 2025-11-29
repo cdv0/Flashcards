@@ -126,3 +126,8 @@ clearBtn.onclick = () => {
     termInput.value = "";
     defInput.value = "";
 };
+
+const cancelBtn = document.getElementById("cancelBtn");
+cancelBtn.onclick = () => {
+    window.location.href = "/pages/home.html";
+};
