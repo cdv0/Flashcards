@@ -585,3 +585,88 @@ button {
   height: 18px;
 }
 
+/* =========================================================
+   Delete Confirmation Modal
+   ========================================================= */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-backdrop.is-hidden {
+  display: none;
+}
+
+.modal-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 1.8rem 2.2rem;
+  width: 100%;
+  max-width: 460px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.25);
+}
+
+.modal-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.modal-body h2 {
+  margin: 0;
+}
+
+.modal-body p {
+  margin: 0;
+  line-height: 25px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.2rem;
+  margin-top: 20px;
+}
+
+.btn {
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  font-weight: 500;
+}
+
+.btn-cancel {
+  background: none;
+  color: #6b7280;
+}
+
+.btn-delete {
+  background: #ef4444;
+  color: white;
+  padding: 0.55rem 1.3rem;
+  border-radius: 12px;
+}
+
+.btn-delete:hover {
+  background: #dc2626;
+}

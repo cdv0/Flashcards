@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Modal Test Page</title>
+  <link rel="stylesheet" href="../styles/main.css" />
+</head>
+
+<body>
+  <h1>Modal Test Page</h1>
+
+  <!-- Delete set test -->
+  <div class="set-card">
+    <p class="set-title">CECS 448 Midterm 2</p>
+    <p class="set-meta">Section: CECS 448</p>
+
+    <button class="delete-set-btn">
+      Delete set
+    </button>
+  </div>
+
+    <script type="module">
+        import { openDeleteConfirmationModal } from "../scripts/openDeleteConfirmationModal.js";
+
+        const deleteBtn = document.querySelector(".delete-set-btn");
+
+        deleteBtn.addEventListener("click", () => {
+            openDeleteConfirmationModal(() => {
+            deleteBtn.closest(".set-card")?.remove();
+            });
+        });
+    </script>
+</body>
+</html>
