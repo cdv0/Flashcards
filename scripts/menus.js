@@ -3,6 +3,7 @@ import { getSections, syncSectionsFromDOM, refreshSectionSelect } from './state.
 import { moveCardToSection } from './sections.js';
 import { openEditSetModal } from './createSetModal.js';
 import { openDeleteConfirmationModal } from './openDeleteConfirmationModal.js';
+import { openRenameSubsetModal } from './renameSubsetModal.js';
 
 let sectionMenu = null;
 let currentSection = null;
@@ -187,11 +188,14 @@ function renameSet() {
   if (!currentCard) return;
   const titleEl = currentCard.querySelector('.card-title');
   if (!titleEl) return;
-  const current = titleEl.textContent || '';
-  const newTitle = window.prompt('Rename flashcard set:', current);
-  if (newTitle && newTitle.trim()) {
-    titleEl.textContent = newTitle.trim();
-  }
+
+  const current = titleEl.textContent?.trim() || '';
+
+  openRenameSubsetModal(current, current, (newTitle) => {
+    const trimmed = newTitle.trim();
+    if (!trimmed) return;
+    titleEl.textContent = trimmed;
+  }, 'set');
 }
 
 function editSet() {

@@ -11,7 +11,7 @@ function createRenameModal() {
   renameModal.innerHTML = `
     <div class="modal-card">
       <div class="modal-header">
-        <h2 class="modal-title" id="renameModalTitle">Rename subset</h2>
+        <h2 class="modal-title" id="renameModalTitle">Rename</h2>
       </div>
 
       <div class="modal-body">
@@ -64,11 +64,11 @@ function closeRenameModal() {
   renameModal.classList.add('is-hidden');
 }
 
-export function openRenameSubsetModal(subsetName, currentTitle, onDone) {
+export function openRenameSubsetModal(itemName, currentTitle, onDone, label = 'subset') {
   if (!renameModal) createRenameModal();
 
   const titleEl = renameModal.querySelector('#renameModalTitle');
-  titleEl.textContent = `Rename subset ${subsetName}`;
+  titleEl.textContent = `Rename ${label} ${itemName}`;
 
   renameInput.value = currentTitle || '';
   renameCount.textContent = `${renameInput.value.length}/50`;
