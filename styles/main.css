@@ -670,3 +670,15 @@ button {
 .btn-delete:hover {
   background: #dc2626;
 }
+
+.btn-leave {
+  background: #2563eb;
+  color: #ffffff;
+  padding: 0.55rem 1.3rem;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.btn-leave:hover {
+  background: #1d4ed8;
+}

@@ -23,7 +23,7 @@
     </button>
   </div>
 
-  <!-- Rename subset test -->
+  <!-- Rename subset test (unchanged) -->
   <div class="set-card" style="margin-top: 2rem;">
     <p id="subsetLabel">Subset: Not confident</p>
     <button
@@ -35,9 +35,22 @@
     </button>
   </div>
 
+  <!-- Leave study warning test (NEW) -->
+  <div class="set-card" style="margin-top: 2rem;">
+    <p id="warningSubsetLabel">Subset: Not confident</p>
+    <button
+      id="leaveWarningBtn"
+      data-subset-name="Not confident"
+      data-set-title="CECS 448 Midterm 2"
+    >
+      Open warning modal
+    </button>
+  </div>
+
   <script type="module">
     import { openDeleteConfirmationModal } from "../scripts/openDeleteConfirmationModal.js";
     import { openRenameSubsetModal } from "../scripts/renameSubsetModal.js";
+    import { openLeaveStudyWarningModal } from "../scripts/leaveStudyWarningModal.js";
 
     // Delete set test
     const deleteBtn = document.querySelector(".delete-set-btn");
@@ -51,7 +64,7 @@
       });
     });
 
-    // Rename subset test
+    // Rename subset test (unchanged)
     const renameBtn = document.getElementById("renameSubsetBtn");
     const subsetLabel = document.getElementById("subsetLabel");
 
@@ -62,6 +75,20 @@
       openRenameSubsetModal(subsetName, currentTitle, (newTitle) => {
         renameBtn.dataset.currentTitle = newTitle;
         subsetLabel.textContent = `Subset: ${newTitle}`;
+      });
+    });
+
+    // Leave study warning test (NEW)
+    const leaveWarningBtn = document.getElementById("leaveWarningBtn");
+    const warningSubsetLabel = document.getElementById("warningSubsetLabel");
+
+    leaveWarningBtn.addEventListener("click", () => {
+      const subsetName = leaveWarningBtn.dataset.subsetName;
+      const setTitle = leaveWarningBtn.dataset.setTitle;
+
+      openLeaveStudyWarningModal(subsetName, setTitle, () => {
+        // example behavior when "Leave" is confirmed
+        warningSubsetLabel.textContent = `Left study session for ${setTitle}`;
       });
     });
   </script>
