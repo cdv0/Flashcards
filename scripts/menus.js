@@ -1,6 +1,7 @@
 
 import { getSections, syncSectionsFromDOM, refreshSectionSelect } from './state.js';
 import { moveCardToSection } from './sections.js';
+import { openEditSetModal } from './createSetModal.js';
 
 let sectionMenu = null;
 let currentSection = null;
@@ -79,7 +80,7 @@ function ensureCardMenu() {
       Rename
     </button>
     <button type="button" class="card-menu-item" data-action="edit-set">
-      Edit set
+      Edit details
     </button>
     <div class="card-menu-divider"></div>
     <button type="button" class="card-menu-item card-menu-item-danger" data-action="delete-set">
@@ -194,9 +195,7 @@ function renameSet() {
 
 function editSet() {
   if (!currentCard) return;
-  const setId = currentCard.dataset.setId || '';
-  // later you can pass ?id=setId
-  window.location.href = 'add_cards.html';
+  openEditSetModal(currentCard);
 }
 
 function deleteSet() {

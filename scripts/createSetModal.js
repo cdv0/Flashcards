@@ -1,21 +1,37 @@
-
 import { refreshSectionSelect } from './state.js';
+
+let modalBackdrop;
+let titleInput;
+let descInput;
+let titleCount;
+let descCount;
+let sectionSelect;
+let publicCheckbox;
+let confirmBtn;
+let cancelBtn;
+let modalTitleEl;
 
 export function setupCreateSetModal() {
   const createBtn = document.querySelector('.create-btn');
-  const modalBackdrop = document.getElementById('createSetModal');
+  modalBackdrop = document.getElementById('createSetModal');
   if (!createBtn || !modalBackdrop) return;
 
-  const titleInput = document.getElementById('setTitle');
-  const descInput = document.getElementById('setDescription');
-  const titleCount = document.getElementById('setTitleCount');
-  const descCount = document.getElementById('setDescCount');
-  const sectionSelect = document.getElementById('setSectionSelect');
-  const publicCheckbox = document.getElementById('setMakePublic');
-  const confirmBtn = document.getElementById('confirmCreateSetBtn');
-  const cancelBtn = document.getElementById('cancelCreateSetBtn');
+  titleInput = document.getElementById('setTitle');
+  descInput = document.getElementById('setDescription');
+  titleCount = document.getElementById('setTitleCount');
+  descCount = document.getElementById('setDescCount');
+  sectionSelect = document.getElementById('setSectionSelect');
+  publicCheckbox = document.getElementById('setMakePublic');
+  confirmBtn = document.getElementById('confirmCreateSetBtn');
+  cancelBtn = document.getElementById('cancelCreateSetBtn');
+  // use your existing h2
+  modalTitleEl = modalBackdrop.querySelector('.modal-header h2');
 
-  function openModal() {
+  function openCreateModal() {
+    // 🔹 CREATE MODE: title + button text
+    if (modalTitleEl) modalTitleEl.textContent = 'Create flashcard set';
+    confirmBtn.textContent = 'Create';
+
     modalBackdrop.classList.remove('is-hidden');
     titleInput.value = '';
     descInput.value = '';
@@ -25,6 +41,21 @@ export function setupCreateSetModal() {
 
     refreshSectionSelect();
     titleInput.focus();
+
+    confirmBtn.onclick = () => {
+      const title = titleInput.value.trim();
+      const description = descInput.value.trim();
+      const sectionId = sectionSelect.value || 'unassigned';
+      const makePublic = publicCheckbox.checked;
+
+      if (!title) {
+        alert('Please enter a title.');
+        return;
+      }
+
+      createFlashcardSet({ title, description, sectionId, makePublic });
+      closeModal();
+    };
   }
 
   function closeModal() {
@@ -39,27 +70,62 @@ export function setupCreateSetModal() {
     descCount.textContent = `${descInput.value.length}/200`;
   });
 
-  createBtn.addEventListener('click', openModal);
+  createBtn.addEventListener('click', openCreateModal);
   cancelBtn.addEventListener('click', closeModal);
 
   modalBackdrop.addEventListener('click', e => {
     if (e.target === modalBackdrop) closeModal();
   });
+}
 
-  confirmBtn.addEventListener('click', () => {
-    const title = titleInput.value.trim();
-    const description = descInput.value.trim();
-    const sectionId = sectionSelect.value || 'unassigned';
+// 🔹 EDIT MODE: called from the card menu
+export function openEditSetModal(card) {
+  if (!modalBackdrop || !card) return;
+
+  const titleEl = card.querySelector('.card-title');
+  const descEl = card.querySelector('.card-desc');
+  const publicPill = card.querySelector('.pill-public');
+
+  const currentTitle = titleEl?.textContent?.trim() || '';
+  const currentDesc = descEl?.textContent?.trim() || '';
+  const isPublic =
+    (publicPill?.textContent || '').trim().toLowerCase() === 'public';
+
+  // 🔹 EDIT MODE: title + button text
+  if (modalTitleEl) modalTitleEl.textContent = 'Edit flashcard set';
+  confirmBtn.textContent = 'Save';
+
+  modalBackdrop.classList.remove('is-hidden');
+
+  // prefill fields
+  titleInput.value = currentTitle;
+  descInput.value = currentDesc;
+  titleCount.textContent = `${currentTitle.length}/50`;
+  descCount.textContent = `${currentDesc.length}/200`;
+  publicCheckbox.checked = isPublic;
+
+  refreshSectionSelect();
+
+  confirmBtn.onclick = () => {
+    const newTitle = titleInput.value.trim();
+    const newDesc = descInput.value.trim();
     const makePublic = publicCheckbox.checked;
 
-    if (!title) {
+    if (!newTitle) {
       alert('Please enter a title.');
       return;
     }
 
-    createFlashcardSet({ title, description, sectionId, makePublic });
-    closeModal();
-  });
+    if (titleEl) titleEl.textContent = newTitle;
+    if (descEl) descEl.textContent = newDesc;
+    if (publicPill) {
+      publicPill.textContent = makePublic ? 'Public' : 'Private';
+    }
+
+    modalBackdrop.classList.add('is-hidden');
+  };
+
+  titleInput.focus();
 }
 
 export function createFlashcardSet({ title, description, sectionId, makePublic, termCount = 0 }) {
@@ -93,7 +159,6 @@ export function createFlashcardSet({ title, description, sectionId, makePublic, 
   p.className = 'card-desc';
   p.textContent = description;
 
-
   const footer = document.createElement('div');
   footer.className = 'card-footer';
 
@@ -103,24 +168,14 @@ export function createFlashcardSet({ title, description, sectionId, makePublic, 
 
   footer.appendChild(termsPill);
 
-  if (makePublic) {
-    const publicPill = document.createElement('span');
-    publicPill.className = 'pill pill-public';
-    publicPill.textContent = 'Public';
-    footer.appendChild(publicPill);
-  }
-  else {
-    const publicPill = document.createElement('span');
-    publicPill.className = 'pill pill-public';
-    publicPill.textContent = 'Private';
-    footer.appendChild(publicPill);
-  }
+  const publicPill = document.createElement('span');
+  publicPill.className = 'pill pill-public';
+  publicPill.textContent = makePublic ? 'Public' : 'Private';
+  footer.appendChild(publicPill);
 
-  
   card.appendChild(header);
   card.appendChild(p);
   card.appendChild(footer);
 
   grid.appendChild(card);
 }
-
