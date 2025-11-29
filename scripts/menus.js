@@ -4,6 +4,8 @@ import { moveCardToSection } from './sections.js';
 import { openEditSetModal } from './createSetModal.js';
 import { openDeleteConfirmationModal } from './openDeleteConfirmationModal.js';
 import { openRenameSubsetModal } from './renameSubsetModal.js';
+import { openChangeSectionModal } from './changeSectionModal.js';
+import { openSectionEditModal } from './addSectionModal.js';
 
 let sectionMenu = null;
 let currentSection = null;
@@ -140,15 +142,8 @@ function hideMenus() {
 
 function renameSection() {
   if (!currentSection) return;
-  const titleSpan = currentSection.querySelector('.section-title-text');
-  if (!titleSpan) return;
-  const current = titleSpan.textContent || '';
-  const newTitle = window.prompt('Rename section:', current);
-  if (newTitle && newTitle.trim()) {
-    titleSpan.textContent = newTitle.trim();
-    syncSectionsFromDOM();
-    refreshSectionSelect();
-  }
+  // reuse the Add Section modal in edit mode
+  openSectionEditModal(currentSection);
 }
 
 function deleteSection() {
@@ -163,25 +158,17 @@ function deleteSection() {
 
 function changeSetSection() {
   if (!currentCard) return;
-  const sections = getSections();
-  if (!sections.length) return;
 
-  const listText = sections
-    .map((s, i) => `${i + 1}. ${s.title}`)
-    .join('\n');
+  const titleEl = currentCard.querySelector('.card-title');
+  const setName = titleEl?.textContent?.trim() || 'this set';
 
-  const choice = window.prompt(
-    `Move set to which section?\n${listText}\n\nEnter a number:`
-  );
-  if (!choice) return;
+  const currentSectionEl = currentCard.closest('.flashcard-section');
+  const currentSectionId = currentSectionEl?.dataset.sectionId || 'unassigned';
 
-  const index = parseInt(choice, 10);
-  if (Number.isNaN(index) || index < 1 || index > sections.length) {
-    alert('Invalid choice.');
-    return;
-  }
-
-  moveCardToSection(currentCard, sections[index - 1].id);
+  openChangeSectionModal(setName, currentSectionId, (newSectionId) => {
+    if (!newSectionId) return;
+    moveCardToSection(currentCard, newSectionId);
+  });
 }
 
 function renameSet() {
