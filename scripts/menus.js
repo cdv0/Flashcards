@@ -2,7 +2,7 @@
 import { getSections, syncSectionsFromDOM, refreshSectionSelect } from './state.js';
 import { moveCardToSection } from './sections.js';
 import { openEditSetModal } from './createSetModal.js';
-import { openDeleteConfirmationModal } from './openDeleteConfirmationModal.js';
+import { openDeleteConfirmationModal, openDeleteSectionModal } from './openDeleteConfirmationModal.js';
 import { openRenameSubsetModal } from './renameSubsetModal.js';
 import { openChangeSectionModal } from './changeSectionModal.js';
 import { openSectionEditModal } from './addSectionModal.js';
@@ -148,10 +148,15 @@ function renameSection() {
 
 function deleteSection() {
   if (!currentSection) return;
-  if (!window.confirm('Delete this section?')) return;
-  currentSection.remove();
-  syncSectionsFromDOM();
-  refreshSectionSelect();
+
+  const titleSpan = currentSection.querySelector('.section-title-text');
+  const sectionName = titleSpan?.textContent?.trim() || 'this section';
+
+  openDeleteSectionModal(sectionName, () => {
+    currentSection.remove();
+    syncSectionsFromDOM();
+    refreshSectionSelect();
+  });
 }
 
 /* card menu actions */

@@ -1,4 +1,7 @@
 let modal = null;
+let titleEl = null;
+let messageEl = null;
+let confirmBtn = null;
 
 function createModal() {
   modal = document.createElement('div');
@@ -12,13 +15,8 @@ function createModal() {
         </div>
 
         <div class="modal-body">
-          <h2 class="modal-title">Delete confirmation</h2>
-          <p>
-            Are you sure you want to delete set
-            <u><strong class="js-set-name"></strong></u>
-            from section
-            <u><strong class="js-section-name"></strong></u>?
-          </p>
+          <h2 class="modal-title js-modal-title">Delete confirmation</h2>
+          <p class="js-modal-message"></p>
         </div>
       </div>
 
@@ -30,6 +28,10 @@ function createModal() {
   `;
 
   document.body.appendChild(modal);
+
+  titleEl = modal.querySelector('.js-modal-title');
+  messageEl = modal.querySelector('.js-modal-message');
+  confirmBtn = modal.querySelector('#confirm-btn');
 
   // Close when clicking cancel or outside
   modal.addEventListener('click', (e) => {
@@ -46,10 +48,29 @@ function closeModal() {
 export function openDeleteConfirmationModal(setName, sectionName, onConfirm) {
   if (!modal) createModal();
 
-  modal.querySelector('.js-set-name').textContent = setName;
-  modal.querySelector('.js-section-name').textContent = sectionName;
+  titleEl.textContent = 'Delete confirmation';
+  messageEl.innerHTML =
+    `Are you sure you want to delete set ` +
+    `<u><strong>${setName}</strong></u> from section ` +
+    `<u><strong>${sectionName}</strong></u>?`;
 
-  const confirmBtn = modal.querySelector('#confirm-btn');
+  confirmBtn.onclick = () => {
+    closeModal();
+    if (onConfirm) onConfirm();
+  };
+
+  modal.classList.remove('is-hidden');
+}
+
+// 🔹 For deleting a SECTION
+export function openDeleteSectionModal(sectionName, onConfirm) {
+  if (!modal) createModal();
+
+  titleEl.textContent = 'Delete section';
+  messageEl.innerHTML =
+    `Are you sure you want to delete section ` +
+    `<u><strong>${sectionName}</strong></u>?`;
+
   confirmBtn.onclick = () => {
     closeModal();
     if (onConfirm) onConfirm();
