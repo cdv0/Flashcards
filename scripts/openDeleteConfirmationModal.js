@@ -15,9 +15,9 @@ function createModal() {
           <h2 class="modal-title">Delete confirmation</h2>
           <p>
             Are you sure you want to delete set
-            <u><strong>CECS 448 Midterm 2</strong></u>
+            <u><strong class="js-set-name"></strong></u>
             from section
-            <u><strong>CECS 448</strong></u>?
+            <u><strong class="js-section-name"></strong></u>?
           </p>
         </div>
       </div>
@@ -43,8 +43,11 @@ function closeModal() {
   modal.classList.add('is-hidden');
 }
 
-export function openDeleteConfirmationModal (onConfirm) {
+export function openDeleteConfirmationModal(setName, sectionName, onConfirm) {
   if (!modal) createModal();
+
+  modal.querySelector('.js-set-name').textContent = setName;
+  modal.querySelector('.js-section-name').textContent = sectionName;
 
   const confirmBtn = modal.querySelector('#confirm-btn');
   confirmBtn.onclick = () => {
