@@ -9,6 +9,7 @@
 <body>
   <h1>Modal Test Page</h1>
 
+  <!-- Delete set test -->
   <div class="set-card">
     <p class="set-title">CECS 448 Midterm 2</p>
     <p class="set-meta">Section: CECS 448</p>
@@ -22,9 +23,23 @@
     </button>
   </div>
 
+  <!-- Rename subset test -->
+  <div class="set-card" style="margin-top: 2rem;">
+    <p id="subsetLabel">Subset: Not confident</p>
+    <button
+      id="renameSubsetBtn"
+      data-subset-name="Not confident"
+      data-current-title="Not confident"
+    >
+      Rename subset
+    </button>
+  </div>
+
   <script type="module">
     import { openDeleteConfirmationModal } from "../scripts/openDeleteConfirmationModal.js";
+    import { openRenameSubsetModal } from "../scripts/renameSubsetModal.js";
 
+    // Delete set test
     const deleteBtn = document.querySelector(".delete-set-btn");
 
     deleteBtn.addEventListener("click", () => {
@@ -33,6 +48,20 @@
 
       openDeleteConfirmationModal(setName, sectionName, () => {
         deleteBtn.closest(".set-card")?.remove();
+      });
+    });
+
+    // Rename subset test
+    const renameBtn = document.getElementById("renameSubsetBtn");
+    const subsetLabel = document.getElementById("subsetLabel");
+
+    renameBtn.addEventListener("click", () => {
+      const subsetName = renameBtn.dataset.subsetName;
+      const currentTitle = renameBtn.dataset.currentTitle;
+
+      openRenameSubsetModal(subsetName, currentTitle, (newTitle) => {
+        renameBtn.dataset.currentTitle = newTitle;
+        subsetLabel.textContent = `Subset: ${newTitle}`;
       });
     });
   </script>
