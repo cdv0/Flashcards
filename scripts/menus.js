@@ -2,6 +2,7 @@
 import { getSections, syncSectionsFromDOM, refreshSectionSelect } from './state.js';
 import { moveCardToSection } from './sections.js';
 import { openEditSetModal } from './createSetModal.js';
+import { openDeleteConfirmationModal } from './openDeleteConfirmationModal.js';
 
 let sectionMenu = null;
 let currentSection = null;
@@ -200,6 +201,18 @@ function editSet() {
 
 function deleteSet() {
   if (!currentCard) return;
-  if (!window.confirm('Delete this flashcard set?')) return;
-  currentCard.remove();
+
+  // Grab set title from the card
+  const titleEl = currentCard.querySelector('.card-title');
+  const setName = titleEl?.textContent?.trim() || 'this set';
+
+  // Grab section name from the parent section
+  const sectionEl = currentCard.closest('.flashcard-section');
+  const sectionTitleEl = sectionEl?.querySelector('.section-title-text');
+  const sectionName = sectionTitleEl?.textContent?.trim() || 'Unassigned';
+
+  // Open your custom delete confirmation modal
+  openDeleteConfirmationModal(setName, sectionName, () => {
+    currentCard.remove();
+  });
 }
