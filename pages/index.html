@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Flashcards Dashboard</title>
+  <title>Your Flashcards</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
+  <!-- CSS lives in /styles -->
+  <link rel="stylesheet" href="../styles/style.css" />
 </head>
 <body>
-  <!-- Top navigation bar -->
+  <!-- Top navigation bar (matches your Figma header) -->
   <header class="top-nav">
     <div class="top-nav__left">
       <div class="logo-badge">F</div>
@@ -63,10 +64,10 @@
     </section>
   </main>
 
-  <!-- ===== Modals & Backdrop ===== -->
+  <!-- ===== Backdrop for all modals ===== -->
   <div id="modal-backdrop" class="modal-backdrop hidden"></div>
 
-  <!-- Add Section Modal -->
+  <!-- ===== Add Section Modal ===== -->
   <div id="add-section-modal" class="modal hidden">
     <div class="modal__panel">
       <h2 class="modal__title">Add section</h2>
@@ -111,7 +112,7 @@
     </div>
   </div>
 
-  <!-- Create Flashcard Set Modal -->
+  <!-- ===== Create Flashcard Set Modal ===== -->
   <div id="create-set-modal" class="modal hidden">
     <div class="modal__panel">
       <h2 class="modal__title">Create flashcard set</h2>
@@ -161,64 +162,7 @@
     </div>
   </div>
 
-  <!-- Edit Flashcard Set Modal -->
-  <div id="edit-set-modal" class="modal hidden">
-    <div class="modal__panel">
-      <h2 class="modal__title">
-        Edit details for
-        <span id="edit-set-title-label">CECS 448 Midterm 2</span>
-      </h2>
-
-      <div class="modal__body">
-        <label class="field-label">
-          <div class="field-label__top">
-            <span>Title</span>
-            <span class="char-counter">
-              <span id="edit-title-count">0</span>/50
-            </span>
-          </div>
-          <input
-            id="edit-title-input"
-            class="field-input"
-            type="text"
-            maxlength="50"
-          />
-        </label>
-
-        <label class="field-label">
-          <div class="field-label__top">
-            <span>Description</span>
-            <span class="char-counter">
-              <span id="edit-desc-count">0</span>/200
-            </span>
-          </div>
-          <textarea
-            id="edit-desc-input"
-            class="field-input field-input--multiline"
-            maxlength="200"
-          ></textarea>
-        </label>
-
-        <label class="checkbox-row">
-          <input id="edit-make-public" type="checkbox" />
-          <span>Make public</span>
-        </label>
-      </div>
-
-      <div class="modal__footer modal__footer--split">
-        <button id="edit-delete-btn" class="btn btn-danger">
-          Delete set
-        </button>
-
-        <div class="modal__footer-right">
-          <button class="btn btn-secondary" data-close-modal="true">Cancel</button>
-          <button id="edit-set-confirm" class="btn btn-primary">Done</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Delete Confirmation Modal -->
+  <!-- ===== Delete Confirmation Modal ===== -->
   <div id="delete-set-modal" class="modal hidden">
     <div class="modal__panel modal__panel--small">
       <h2 class="modal__title">Delete confirmation</h2>
@@ -241,6 +185,7 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <!-- JS lives in /scripts -->
+  <script src="../scripts/script.js"></script>
 </body>
 </html>
