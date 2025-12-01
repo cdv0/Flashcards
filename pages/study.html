@@ -80,10 +80,13 @@
         </div>
 
         <script src="../scripts/study.js" defer></script>
+        <script src="../scripts/renameSubsetModal.js"></script>
+
         <script>
         document.addEventListener("DOMContentLoaded", () => {
             const subsetMenuBtn = document.querySelector('.subset-menu-btn');
             const subsetModal = document.getElementById('subsetOptionsModal');
+            const renameBtn = document.getElementById("renameSubset");
 
             // open/close modal
             subsetMenuBtn.addEventListener('click', (e) => {
@@ -96,6 +99,20 @@
                 if (!subsetModal.contains(e.target) && !subsetMenuBtn.contains(e.target)) {
                     subsetModal.classList.add('hidden');
                 }
+            });
+
+            // rename modal
+            renameBtn.addEventListener("click", () => {
+                const card = document.querySelector(".subset-card");
+                const titleSpan = card.querySelector("span:first-child");
+                
+                openRenameSubsetModal(
+                    "Subset",
+                    titleSpan.textContent,
+                    (newTitle) => {
+                        titleSpan.textContent = newTitle;
+                    }
+                );
             });
         });
         </script>

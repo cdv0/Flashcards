@@ -243,3 +243,59 @@ font-weight: 600;
     color: red;
     font-weight: 600;
 }
+
+/* rename modal */
+.rename-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.rename-modal {
+    background: white;
+    padding: 20px;
+    width: 360px;
+    border-radius: 12px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.rename-modal input {
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 16px;
+    border: 1px solid #555;
+    background: white;
+    color: black;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.modal-buttons button {
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+}
+
+#cancelRename {
+    background: white;
+    color: gray;
+}
+
+#doneRename {
+    background: #4a6bff;
+    color: white;
+}

@@ -1,88 +1,61 @@
+// renameSubsetModal.js
+
 let renameModal = null;
 let renameInput = null;
-let renameCount = null;
 let cancelBtn = null;
 let doneBtn = null;
+let onRenameCallback = null;
 
-function createRenameModal() {
-  renameModal = document.createElement('div');
-  renameModal.className = 'modal-backdrop is-hidden';
+function openRenameSubsetModal(title, currentName, onRename) {
+    onRenameCallback = onRename;
 
-  renameModal.innerHTML = `
-    <div class="modal-card">
-      <div class="modal-header">
-        <h2 class="modal-title" id="renameModalTitle">Rename</h2>
-      </div>
+    // Create modal if not made yet
+    if (!renameModal) {
+        renameModal = document.createElement("div");
+        renameModal.className = "rename-modal-overlay";
+        renameModal.innerHTML = `
+            <div class="rename-modal">
+                <h2>Rename Subset</h2>
 
-      <div class="modal-body">
-        <div class="modal-field">
-          <div class="modal-field-label-row">
-            <label for="renameInput" class="modal-label">New title</label>
-            <span id="renameCount" class="char-count">0/50</span>
-          </div>
-          <input
-            type="text"
-            id="renameInput"
-            class="modal-input"
-            placeholder="Type here"
-            maxlength="50"
-          />
-        </div>
-      </div>
+                <input id="renameInput" type="text"/>
 
-      <div class="modal-footer">
-        <button type="button" class="modal-btn cancel-btn" id="cancelRenameBtn">
-          Cancel
-        </button>
-        <button type="button" class="modal-btn primary-btn" id="confirmRenameBtn">
-          Done
-        </button>
-      </div>
-    </div>
-  `;
+                <div class="modal-buttons">
+                    <button id="cancelRename">Cancel</button>
+                    <button id="doneRename">Done</button>
+                </div>
+            </div>
+        `;
 
-  document.body.appendChild(renameModal);
+        document.body.appendChild(renameModal);
 
-  renameInput = renameModal.querySelector('#renameInput');
-  renameCount = renameModal.querySelector('#renameCount');
-  cancelBtn = renameModal.querySelector('#cancelRenameBtn');
-  doneBtn = renameModal.querySelector('#confirmRenameBtn');
+        renameInput = renameModal.querySelector("#renameInput");
+        cancelBtn = renameModal.querySelector("#cancelRename");
+        doneBtn = renameModal.querySelector("#doneRename");
 
-  renameInput.addEventListener('input', () => {
-    renameCount.textContent = `${renameInput.value.length}/50`;
-  });
+        // CANCEL closes modal
+        cancelBtn.addEventListener("click", () => {
+            closeRenameSubsetModal();
+        });
 
-  cancelBtn.addEventListener('click', closeRenameModal);
+        // DONE renames + closes modal
+        doneBtn.addEventListener("click", () => {
+            const newText = renameInput.value.trim();
 
-  renameModal.addEventListener('click', (e) => {
-    if (e.target === renameModal) closeRenameModal();
-  });
-}
+            if (onRenameCallback) {
+                onRenameCallback(newText);
+            }
 
-function closeRenameModal() {
-  if (!renameModal) return;
-  renameModal.classList.add('is-hidden');
-}
-
-export function openRenameSubsetModal(itemName, currentTitle, onDone, label = 'subset') {
-  if (!renameModal) createRenameModal();
-
-  const titleEl = renameModal.querySelector('#renameModalTitle');
-  titleEl.textContent = `Rename ${label} ${itemName}`;
-
-  renameInput.value = currentTitle || '';
-  renameCount.textContent = `${renameInput.value.length}/50`;
-
-  doneBtn.onclick = () => {
-    const newTitle = renameInput.value.trim();
-    if (!newTitle) {
-      alert('Please enter a new title.');
-      return;
+            closeRenameSubsetModal();
+        });
     }
-    closeRenameModal();
-    if (onDone) onDone(newTitle);
-  };
 
-  renameModal.classList.remove('is-hidden');
-  renameInput.focus();
+    renameInput.value = currentName;
+    renameModal.style.display = "flex";
+    renameInput.focus();
+}
+
+function closeRenameSubsetModal() {
+    if (renameModal) {
+        renameModal.style.display = "none";
+    }
 }
