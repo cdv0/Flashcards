@@ -131,3 +131,15 @@ const cancelBtn = document.getElementById("cancelBtn");
 cancelBtn.onclick = () => {
     window.location.href = "/pages/home.html";
 };
+
+const createBtn = document.getElementById("createBtn");
+createBtn.onclick = () => {
+    // require at least 1 card
+    if (terms.length === 0) {
+        alert("Please add at least one card before creating.")
+        return;
+    }
+
+    // navigate to view flashcards
+    window.location.href = "/pages/test_modals.html"; // FIX LINK ONCE VIEW FLASHCARDS IS CREATED
+};
