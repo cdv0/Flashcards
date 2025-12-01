@@ -1,4 +1,3 @@
-
 let current = 0;
 let showingFront = true;
 
