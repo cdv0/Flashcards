@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Your Flashcards</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- CSS lives in /styles -->
+  <link rel="stylesheet" href="../styles/style.css" />
+</head>
+<body>
+  <!-- Top navigation bar (matches your Figma header) -->
+  <header class="top-nav">
+    <div class="top-nav__left">
+      <div class="logo-badge">F</div>
+      <span class="app-name">Flashcards</span>
+    </div>
+
+    <div class="top-nav__search">
+      <div class="search-input">
+        <span class="search-icon">🔍</span>
+        <input
+          id="global-search"
+          type="text"
+          placeholder="Search"
+          aria-label="Search all flashcards"
+        />
+      </div>
+    </div>
+
+    <div class="top-nav__right">
+      <span class="top-nav__label">Your Flashcards</span>
+      <div class="profile-dot"></div>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="page">
+    <section class="page-header">
+      <h1>Your Flashcards</h1>
+
+      <div class="page-header__right">
+        <div class="search-input search-input--wide">
+          <span class="search-icon">🔍</span>
+          <input
+            id="set-search"
+            type="text"
+            placeholder="Search your flashcards"
+            aria-label="Search your flashcard sets"
+          />
+        </div>
+
+        <button id="add-section-btn" class="btn btn-secondary">
+          Add section
+        </button>
+        <button id="create-set-btn" class="btn btn-primary">
+          + Create
+        </button>
+      </div>
+    </section>
+
+    <!-- Sections container (Unassigned + CECS 448, etc.) -->
+    <section id="sections-container" class="sections-container">
+      <!-- JS will render sections + cards here -->
+    </section>
+  </main>
+
+  <!-- ===== Backdrop for all modals ===== -->
+  <div id="modal-backdrop" class="modal-backdrop hidden"></div>
+
+  <!-- ===== Add Section Modal ===== -->
+  <div id="add-section-modal" class="modal hidden">
+    <div class="modal__panel">
+      <h2 class="modal__title">Add section</h2>
+
+      <div class="modal__body">
+        <label class="field-label">
+          <div class="field-label__top">
+            <span>Section title</span>
+            <span class="char-counter">
+              <span id="section-title-count">0</span>/50
+            </span>
+          </div>
+          <div class="field-row">
+            <input
+              id="section-title-input"
+              class="field-input"
+              type="text"
+              maxlength="50"
+              placeholder="Type here"
+            />
+          </div>
+        </label>
+
+        <div class="modal__group">
+          <span class="field-label">Select color</span>
+          <div class="color-row">
+            <button class="color-dot color-dot--pink" data-color="pink"></button>
+            <button class="color-dot color-dot--orange" data-color="orange"></button>
+            <button class="color-dot color-dot--yellow" data-color="yellow"></button>
+            <button class="color-dot color-dot--green" data-color="green"></button>
+            <button class="color-dot color-dot--blue" data-color="blue"></button>
+            <button class="color-dot color-dot--purple" data-color="purple"></button>
+            <button class="color-dot color-dot--magenta" data-color="magenta"></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal__footer">
+        <button class="btn btn-secondary" data-close-modal="true">Cancel</button>
+        <button id="section-add-confirm" class="btn btn-primary">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Create Flashcard Set Modal ===== -->
+  <div id="create-set-modal" class="modal hidden">
+    <div class="modal__panel">
+      <h2 class="modal__title">Create flashcard set</h2>
+
+      <div class="modal__body">
+        <label class="field-label">
+          <div class="field-label__top">
+            <span>Title</span>
+            <span class="char-counter">
+              <span id="create-title-count">0</span>/50
+            </span>
+          </div>
+          <input
+            id="create-title-input"
+            class="field-input"
+            type="text"
+            maxlength="50"
+            placeholder="Type here"
+          />
+        </label>
+
+        <label class="field-label">
+          <div class="field-label__top">
+            <span>Description</span>
+            <span class="char-counter">
+              <span id="create-desc-count">0</span>/200
+            </span>
+          </div>
+          <textarea
+            id="create-desc-input"
+            class="field-input field-input--multiline"
+            maxlength="200"
+            placeholder="Type here"
+          ></textarea>
+        </label>
+
+        <label class="checkbox-row">
+          <input id="create-make-public" type="checkbox" />
+          <span>Make public</span>
+        </label>
+      </div>
+
+      <div class="modal__footer">
+        <button class="btn btn-secondary" data-close-modal="true">Cancel</button>
+        <button id="create-set-confirm" class="btn btn-primary">Create</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Delete Confirmation Modal ===== -->
+  <div id="delete-set-modal" class="modal hidden">
+    <div class="modal__panel modal__panel--small">
+      <h2 class="modal__title">Delete confirmation</h2>
+      <div class="modal__body">
+        <p class="delete-text">
+          Are you sure you want to delete set
+          <strong id="delete-set-name">CECS 448 Midterm 2</strong>
+          from section
+          <strong id="delete-section-name">CECS 448</strong>?
+        </p>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn-secondary" data-close-modal="true">
+          Cancel
+        </button>
+        <button id="delete-set-confirm" class="btn btn-danger">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS lives in /scripts -->
+  <script src="../scripts/script.js"></script>
+</body>
+</html>

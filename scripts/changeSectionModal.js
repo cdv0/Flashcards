@@ -1,8 +1,7 @@
-import { getSections } from './state.js';
-
 let modal = null;
 let setNameEl = null;
-let selectEl = null;
+let inputEl = null;
+let addNewSectionLink = null;
 let cancelBtn = null;
 let doneBtn = null;
 
@@ -22,21 +21,31 @@ function createChangeSectionModal() {
       <div class="modal-body">
         <div class="modal-field">
           <div class="modal-field-label-row">
-            <label for="changeSectionSelect" class="modal-label">
+            <label for="changeSectionInput" class="modal-label">
               New section
             </label>
           </div>
-          <select id="changeSectionSelect" class="modal-select"></select>
+          <input 
+            type="text" 
+            id="changeSectionInput" 
+            class="modal-input" 
+            placeholder="Enter section name"
+          />
         </div>
       </div>
 
       <div class="modal-actions">
-        <button type="button" class="btn btn-cancel" id="change-section-cancel">
-          Cancel
-        </button>
-        <button type="button" class="btn btn-primary" id="change-section-done">
-          Done
-        </button>
+        <a href="#" class="add-new-section-link" id="add-new-section-link">
+          + Add to existing section
+        </a>
+        <div class="modal-buttons">
+          <button type="button" class="btn btn-cancel" id="change-section-cancel">
+            Cancel
+          </button>
+          <button type="button" class="btn btn-primary" id="change-section-done">
+            Done
+          </button>
+        </div>
       </div>
     </div>
   `;
@@ -44,13 +53,22 @@ function createChangeSectionModal() {
   document.body.appendChild(modal);
 
   setNameEl = modal.querySelector('.js-set-name');
-  selectEl = modal.querySelector('#changeSectionSelect');
+  inputEl = modal.querySelector('#changeSectionInput');
+  addNewSectionLink = modal.querySelector('#add-new-section-link');
   cancelBtn = modal.querySelector('#change-section-cancel');
   doneBtn = modal.querySelector('#change-section-done');
 
   cancelBtn.addEventListener('click', closeChangeSectionModal);
   modal.addEventListener('click', (e) => {
     if (e.target === modal) closeChangeSectionModal();
+  });
+
+  addNewSectionLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    console.log('Add a new section clicked');
+    // You can add logic here to create a new section
+    // For now, just close the modal
+    closeChangeSectionModal();
   });
 }
 
@@ -62,40 +80,30 @@ function closeChangeSectionModal() {
 /**
  * Open the Change Section modal.
  * @param {string} setName - title of the set
- * @param {string} currentSectionId - id of the current section
- * @param {(newSectionId: string) => void} onDone - callback when Done is clicked
+ * @param {string} currentSection - name of the current section
+ * @param {(newSectionName: string) => void} onDone - callback when Done is clicked
  */
-export function openChangeSectionModal(setName, currentSectionId, onDone) {
+export function openChangeSectionModal(setName, currentSection, onDone) {
   if (!modal) createChangeSectionModal();
 
   // Set title text
   setNameEl.textContent = setName || '';
 
-  // Populate dropdown from sections
-  const sections = getSections();
-  selectEl.innerHTML = '';
-
-  sections.forEach((s) => {
-    const option = document.createElement('option');
-    option.value = s.id;
-    option.textContent = s.title;
-    selectEl.appendChild(option);
-  });
-
-  // Pre-select current section if it exists
-  if (currentSectionId && sections.some(s => s.id === currentSectionId)) {
-    selectEl.value = currentSectionId;
-  }
+  // Pre-fill with current section if provided
+  inputEl.value = currentSection || '';
 
   doneBtn.onclick = () => {
-    const chosenId = selectEl.value;
-    if (!chosenId) {
-      closeChangeSectionModal();
+    const newSectionName = inputEl.value.trim();
+    if (!newSectionName) {
+      alert('Please enter a section name');
       return;
     }
     closeChangeSectionModal();
-    if (onDone) onDone(chosenId);
+    if (onDone) onDone(newSectionName);
   };
 
   modal.classList.remove('is-hidden');
+  
+  // Focus the input after a brief delay
+  setTimeout(() => inputEl.focus(), 100);
 }

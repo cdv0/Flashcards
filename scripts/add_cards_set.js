@@ -129,7 +129,7 @@ clearBtn.onclick = () => {
 
 const cancelBtn = document.getElementById("cancelBtn");
 cancelBtn.onclick = () => {
-    window.location.href = "/pages/home.html";
+    window.location.href = "../pages/view.html";
 };
 
 const createBtn = document.getElementById("createBtn");
@@ -141,5 +141,5 @@ createBtn.onclick = () => {
     }
 
     // navigate to view flashcards
-    window.location.href = "/pages/test_modals.html"; // FIX LINK ONCE VIEW FLASHCARDS IS CREATED
+    window.location.href = "../pages/view.html"; // FIX LINK ONCE VIEW FLASHCARDS IS CREATED
 };
