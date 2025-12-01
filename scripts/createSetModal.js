@@ -137,18 +137,18 @@ export function createFlashcardSet({ title, description, sectionId, makePublic, 
 
   const grid = targetSection.querySelector('.flashcard-grid');
 
-  const card = document.createElement('div');  //replace div for 'a'
+  const card = document.createElement('a');  //replace div for 'a'
   card.className = 'flashcard-card';
 
-  // route cecs midterm 2 to view flashcards
- // if (title === "CECS 448 Midterm 2") {
-  //  card.href = "LINK TO THE FILE";
-  //} else {
-  //  card.href = "#";
-  //}
+  // route cecs midterm 2 to add card editor
+  if (title === "CECS 448 Midterm 2") {
+    card.href = "./add_cards_set.html";
+  } else {
+    card.href = "#";
+  }
 
-  //card.style.textDecoration = "none";
-  //card.style.color = "inherit";
+  card.style.textDecoration = "none";
+  card.style.color = "inherit";
 
   card.dataset.setId = `set-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
 
