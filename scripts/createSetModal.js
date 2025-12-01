@@ -78,7 +78,6 @@ export function setupCreateSetModal() {
   });
 }
 
-// 🔹 EDIT MODE: called from the card menu
 export function openEditSetModal(card) {
   if (!modalBackdrop || !card) return;
 
@@ -91,7 +90,6 @@ export function openEditSetModal(card) {
   const isPublic =
     (publicPill?.textContent || '').trim().toLowerCase() === 'public';
 
-  // 🔹 EDIT MODE: title + button text
   if (modalTitleEl) modalTitleEl.textContent = 'Edit flashcard set';
   confirmBtn.textContent = 'Save';
 
@@ -137,18 +135,10 @@ export function createFlashcardSet({ title, description, sectionId, makePublic, 
 
   const grid = targetSection.querySelector('.flashcard-grid');
 
-  const card = document.createElement('a');  //replace div for 'a'
-  card.className = 'flashcard-card';
+const card = document.createElement('div');
+card.className = 'flashcard-card';
+card.dataset.setId = `set-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
 
-  // route cecs midterm 2 to add card editor
-  if (title === "CECS 448 Midterm 2") {
-    card.href = "./add_cards_set.html";
-  } else {
-    card.href = "#";
-  }
-
-  card.style.textDecoration = "none";
-  card.style.color = "inherit";
 
   card.dataset.setId = `set-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
 
@@ -187,6 +177,23 @@ export function createFlashcardSet({ title, description, sectionId, makePublic, 
   card.appendChild(header);
   card.appendChild(p);
   card.appendChild(footer);
+
+// Click anywhere on the card EXCEPT the menu button → go to editor
+card.addEventListener('click', (event) => {
+  // if the click came from the menu button, do nothing
+  if (event.target.closest('.card-menu-btn')) {
+    return;
+  }
+
+  // For now, only CECS 448 Midterm 2 routes to add_cards_set.html
+  if (title === "CECS 448 Midterm 2") {
+    window.location.href = "./add_cards_set.html";
+  } else {
+    // later you can route other sets based on ID, etc.
+    // window.location.href = "./add_cards_set.html";
+  }
+});
+
 
   grid.appendChild(card);
 }
