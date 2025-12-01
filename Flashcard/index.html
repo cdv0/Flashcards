@@ -2,82 +2,244 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>STEMCards - Flashcards</title>
+  <title>Flashcards Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Link to your vanilla CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="app">
-    <!-- Top bar -->
-    <header class="app-header">
-      <div class="logo-area">
-        <div class="logo-icon">📚</div>
-        <div class="logo-text">
-          <h1>STEMCards</h1>
-          <p>Study smarter. One card at a time.</p>
-        </div>
-      </div>
+  <!-- Top navigation bar -->
+  <header class="top-nav">
+    <div class="top-nav__left">
+      <div class="logo-badge">F</div>
+      <span class="app-name">Flashcards</span>
+    </div>
 
-      <div class="search-area">
-        <div class="search-wrapper">
+    <div class="top-nav__search">
+      <div class="search-input">
+        <span class="search-icon">🔍</span>
+        <input
+          id="global-search"
+          type="text"
+          placeholder="Search"
+          aria-label="Search all flashcards"
+        />
+      </div>
+    </div>
+
+    <div class="top-nav__right">
+      <span class="top-nav__label">Your Flashcards</span>
+      <div class="profile-dot"></div>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="page">
+    <section class="page-header">
+      <h1>Your Flashcards</h1>
+
+      <div class="page-header__right">
+        <div class="search-input search-input--wide">
           <span class="search-icon">🔍</span>
           <input
-            id="search-input"
+            id="set-search"
             type="text"
-            placeholder="Search flashcard sets..."
+            placeholder="Search your flashcards"
+            aria-label="Search your flashcard sets"
           />
         </div>
+
+        <button id="add-section-btn" class="btn btn-secondary">
+          Add section
+        </button>
+        <button id="create-set-btn" class="btn btn-primary">
+          + Create
+        </button>
       </div>
-    </header>
+    </section>
 
-    <!-- Main content -->
-    <main class="app-main">
-      <!-- Left: sets list -->
-      <section class="sets-panel">
-        <div class="panel-header">
-          <h2>Your Sets</h2>
-          <p>Select a set to start studying.</p>
-        </div>
-        <div id="sets-list" class="sets-list">
-          <!-- JS will fill this -->
-        </div>
-      </section>
+    <!-- Sections container (Unassigned + CECS 448, etc.) -->
+    <section id="sections-container" class="sections-container">
+      <!-- JS will render sections + cards here -->
+    </section>
+  </main>
+    <!-- ===== Modals & Backdrop ===== -->
+    <div id="modal-backdrop" class="modal-backdrop hidden"></div>
 
-      <!-- Right: current set / study view -->
-      <section class="study-panel">
-        <div class="panel-header">
-          <h2 id="current-set-title">Pick a set</h2>
-          <p id="current-set-description">
-            Choose a set on the left to see the cards.
+    <!-- Add Section Modal -->
+    <div id="add-section-modal" class="modal hidden">
+      <div class="modal__panel">
+        <h2 class="modal__title">Add section</h2>
+  
+        <div class="modal__body">
+          <label class="field-label">
+            <div class="field-label__top">
+              <span>Section title</span>
+              <span class="char-counter">
+                <span id="section-title-count">0</span>/50
+              </span>
+            </div>
+            <div class="field-row">
+              <input
+                id="section-title-input"
+                class="field-input"
+                type="text"
+                maxlength="50"
+                placeholder="Type here"
+              />
+            </div>
+          </label>
+  
+          <div class="modal__group">
+            <span class="field-label">Select color</span>
+            <div class="color-row">
+              <button class="color-dot color-dot--pink" data-color="pink"></button>
+              <button class="color-dot color-dot--orange" data-color="orange"></button>
+              <button class="color-dot color-dot--yellow" data-color="yellow"></button>
+              <button class="color-dot color-dot--green" data-color="green"></button>
+              <button class="color-dot color-dot--blue" data-color="blue"></button>
+              <button class="color-dot color-dot--purple" data-color="purple"></button>
+              <button class="color-dot color-dot--magenta" data-color="magenta"></button>
+            </div>
+          </div>
+        </div>
+  
+        <div class="modal__footer">
+          <button class="btn btn-secondary" data-close-modal="true">Cancel</button>
+          <button id="section-add-confirm" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Create Flashcard Set Modal -->
+    <div id="create-set-modal" class="modal hidden">
+      <div class="modal__panel">
+        <h2 class="modal__title">Create flashcard set</h2>
+  
+        <div class="modal__body">
+          <label class="field-label">
+            <div class="field-label__top">
+              <span>Title</span>
+              <span class="char-counter">
+                <span id="create-title-count">0</span>/50
+              </span>
+            </div>
+            <input
+              id="create-title-input"
+              class="field-input"
+              type="text"
+              maxlength="50"
+              placeholder="Type here"
+            />
+          </label>
+  
+          <label class="field-label">
+            <div class="field-label__top">
+              <span>Description</span>
+              <span class="char-counter">
+                <span id="create-desc-count">0</span>/200
+              </span>
+            </div>
+            <textarea
+              id="create-desc-input"
+              class="field-input field-input--multiline"
+              maxlength="200"
+              placeholder="Type here"
+            ></textarea>
+          </label>
+  
+          <label class="checkbox-row">
+            <input id="create-make-public" type="checkbox" />
+            <span>Make public</span>
+          </label>
+        </div>
+  
+        <div class="modal__footer">
+          <button class="btn btn-secondary" data-close-modal="true">Cancel</button>
+          <button id="create-set-confirm" class="btn btn-primary">Create</button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Edit Flashcard Set Modal -->
+    <div id="edit-set-modal" class="modal hidden">
+      <div class="modal__panel">
+        <h2 class="modal__title">
+          Edit details for
+          <span id="edit-set-title-label">CECS 448 Midterm 2</span>
+        </h2>
+  
+        <div class="modal__body">
+          <label class="field-label">
+            <div class="field-label__top">
+              <span>Title</span>
+              <span class="char-counter">
+                <span id="edit-title-count">0</span>/50
+              </span>
+            </div>
+            <input
+              id="edit-title-input"
+              class="field-input"
+              type="text"
+              maxlength="50"
+            />
+          </label>
+  
+          <label class="field-label">
+            <div class="field-label__top">
+              <span>Description</span>
+              <span class="char-counter">
+                <span id="edit-desc-count">0</span>/200
+              </span>
+            </div>
+            <textarea
+              id="edit-desc-input"
+              class="field-input field-input--multiline"
+              maxlength="200"
+            ></textarea>
+          </label>
+  
+          <label class="checkbox-row">
+            <input id="edit-make-public" type="checkbox" />
+            <span>Make public</span>
+          </label>
+        </div>
+  
+        <div class="modal__footer modal__footer--split">
+          <button id="edit-delete-btn" class="btn btn-danger">
+            Delete set
+          </button>
+  
+          <div class="modal__footer-right">
+            <button class="btn btn-secondary" data-close-modal="true">Cancel</button>
+            <button id="edit-set-confirm" class="btn btn-primary">Done</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-set-modal" class="modal hidden">
+      <div class="modal__panel modal__panel--small">
+        <h2 class="modal__title">Delete confirmation</h2>
+        <div class="modal__body">
+          <p class="delete-text">
+            Are you sure you want to delete set
+            <strong id="delete-set-name">CECS 448 Midterm 2</strong>
+            from section
+            <strong id="delete-section-name">CECS 448</strong>?
           </p>
         </div>
-
-        <div class="card-area">
-          <div id="card-box" class="flashcard disabled">
-            <div id="card-term" class="card-term">
-              No card selected yet.
-            </div>
-            <div id="card-definition" class="card-definition hidden">
-              <!-- Definition will appear here -->
-            </div>
-          </div>
-
-          <div class="card-controls">
-            <button id="prev-card" class="btn" disabled>Previous</button>
-            <button id="flip-card" class="btn" disabled>Show Answer</button>
-            <button id="next-card" class="btn" disabled>Next</button>
-          </div>
-
-          <div class="card-progress">
-            <span id="card-counter">0 / 0 cards</span>
-          </div>
+        <div class="modal__footer">
+          <button class="btn btn-secondary" data-close-modal="true">
+            Cancel
+          </button>
+          <button id="delete-set-confirm" class="btn btn-danger">
+            Delete
+          </button>
         </div>
-      </section>
-    </main>
-  </div>
-
-  <!-- Vanilla JS -->
+      </div>
+    </div>
+  
   <script src="script.js"></script>
 </body>
 </html>
