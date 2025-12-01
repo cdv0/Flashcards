@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>View flashcards</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../styles/style.css" />
+</head>
+<body>
+  <!-- Same header as other pages -->
+  <header class="top-nav">
+    <div class="top-nav__left">
+      <div class="logo-badge">F</div>
+      <span class="app-name">Flashcards</span>
+    </div>
+
+    <div class="top-nav__search">
+      <div class="search-input">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search" />
+      </div>
+    </div>
+
+    <div class="top-nav__right">
+      <a href="index.html" class="top-nav__label top-nav__link">
+        Your Flashcards
+      </a>
+      <div class="profile-dot"></div>
+    </div>
+  </header>
+
+  <main class="page set-view-page">
+    <!-- Top row: set title + pills + menu + Quiz/Study buttons -->
+    <section class="set-view-header">
+      <div class="set-view-header__left">
+        <h1 id="set-view-title" class="set-view-title">CECS 448 Midterm 2</h1>
+        <div class="set-view-pills">
+          <span class="pill pill--blue">CECS 448</span>
+          <span class="pill pill--gray">Public</span>
+
+          <div class="menu-wrapper">
+            <button
+              id="set-view-menu-button"
+              class="icon-button"
+              type="button"
+              aria-label="Set menu"
+            >
+              ⋮
+            </button>
+            <div id="set-view-menu" class="menu-dropdown hidden">
+              <button class="menu-item">Change section</button>
+              <button class="menu-item">Edit details</button>
+              <button class="menu-item">Edit set</button>
+              <button class="menu-item menu-item--danger">Delete set</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="set-view-header__right">
+        <button class="btn btn-primary btn-quiz">Quiz</button>
+        <button class="btn btn-primary btn-study">Study</button>
+      </div>
+    </section>
+
+    <!-- Big flashcard area -->
+    <section class="set-view-card-wrapper">
+      <div class="set-view-card-toolbar">
+        <div></div>
+        <button class="btn btn-outline" type="button">
+          Add to ..
+        </button>
+      </div>
+
+      <div id="set-view-card" class="set-view-card">
+        <div id="set-view-card-term" class="set-view-card-term">
+          Term
+        </div>
+      </div>
+
+      <div class="set-view-card-toolbar set-view-card-toolbar--bottom">
+        <div class="set-view-pagination">
+          <button id="prev-card-btn" class="btn btn-outline" type="button">
+            ← Previous
+          </button>
+
+          <span class="set-view-page-indicator">
+            <span id="card-index-label">1</span>
+            of
+            <span id="card-total-label">2</span>
+          </span>
+
+          <button id="next-card-btn" class="btn btn-outline" type="button">
+            Next →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Terms table -->
+    <section class="terms-table-section">
+      <div class="terms-header">
+        <div class="terms-header-left">
+          <span>Terms in this set</span>
+          <span id="terms-count-pill" class="terms-count-pill">0 terms</span>
+        </div>
+        <button class="btn btn-outline btn-small" type="button">
+          Filter ▾
+        </button>
+      </div>
+
+      <div class="terms-table">
+        <div class="terms-table__header-row">
+          <div class="terms-table__col terms-table__col--index">#</div>
+          <div class="terms-table__col">Term</div>
+          <div class="terms-table__col">Definition</div>
+          <div class="terms-table__col terms-table__col--actions"></div>
+        </div>
+
+        <div id="terms-table-body" class="terms-table__body">
+          <!-- rows added by JS -->
+        </div>
+
+        <div class="terms-table__footer">
+          – END OF SET –
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="../scripts/view-flashcards.js"></script>
+</body>
+</html>

@@ -179,13 +179,11 @@ const sections = [
           card.appendChild(desc);
           card.appendChild(bottomRow);
   
-          // Clicking the card (not the dots) → go to add flashcards
-          card.addEventListener("click", () => {
-            window.location.href = "add-flashcards.html";
-          });
-  
-          body.appendChild(card);
+                  // Clicking the card (not the dots) → go to view flashcard page
+        card.addEventListener("click", () => {
+          window.location.href = "view-flashcard.html";
         });
+
   
         sectionDiv.appendChild(header);
         sectionDiv.appendChild(body);
