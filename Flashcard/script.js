@@ -208,7 +208,8 @@ const sections = [
         card.appendChild(desc);
         card.appendChild(bottomRow);
   
-        // Open edit modal when clicking the card
+        // For demo: clicking a card opens Edit modal
+        // (if you want it to go to add-flashcards page, you can change this later)
         card.addEventListener("click", () => {
           openEditSetModal(section.id, set.id);
         });
@@ -411,7 +412,7 @@ const sections = [
     });
   });
   
-  // (Optional) clicking on dark backdrop closes modal
+  // clicking on dark backdrop closes modal
   backdrop.addEventListener("click", closeAllModals);
   
   // ====== Initial render ======
