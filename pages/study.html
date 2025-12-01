@@ -5,14 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Study</title>
         <link rel="stylesheet" href="../styles/study.css" />
+        <link rel="stylesheet" href="../styles/main.css" />
     </head>
     <body>
         <div class="page-container">
             <header class="top-bar">
-                <h2 class="title">Studying flashcards <span class="set-name">CECS 448 Midterm 2</span></h2>
+                <h2 class="title">
+                    Studying flashcards
+                    <span class="set-name">CECS 448 Midterm 2</span>
+                </h2>
                 <div class="right-controls">
-                    <button class="quiz-btn">Switch to quiz</button>
                     <button class="restart-btn">Restart</button>
+                    <button class="exit-btn">Exit</button>
                 </div>
             </header>
 
@@ -28,11 +32,56 @@
 
             <div class="main-content">
                 <div class="flashcard">
-                    <button class="dropdown-btn">Add to ▾</button>
-                    <button class="delete-btn">🗑</button>
-                    <button class="edit-btn">✎</button>
+                    <div class="flashcard-header-row">
+                        <div class="side-toggle">
+                            <button id="term-first-btn" class="side-btn active">
+                                Term first
+                            </button>
+                            <button id="definition-first-btn" class="side-btn">
+                                Definition first
+                            </button>
+                        </div>
 
-                    <div class="flashcard-text">Term</div>
+                        <div class="flashcard-actions">
+                            <button class="dropdown-btn" id="add-to-btn">
+                                Add to ▾
+                            </button>
+                            <div id="addToModal" class="add-to-modal hidden">
+                                <div class="add-to-item">
+                                    <span class="subset-title">Not confident</span>
+                                    <span class="subset-count">4 TERMS</span>
+                                </div>
+                                <div class="add-to-item">
+                                    <span class="subset-title">Semi-confident</span>
+                                    <span class="subset-count">4 TERMS</span>
+                                </div>
+                                <div class="add-to-item">
+                                    <span class="subset-title">Confident</span>
+                                    <span class="subset-count">4 TERMS</span>
+                                </div>
+                            </div>
+
+                            <button class="delete-btn">🗑</button>
+                            <button class="edit-btn">✎</button>
+                        </div>
+                    </div>
+
+                    <div class="flashcard-content">
+                        <div class="flashcard-side flashcard-term">
+                            <div class="flashcard-label">Term</div>
+                            <div class="flashcard-text" id="term-text">Term 1</div>
+                        </div>
+                        <div class="flashcard-side flashcard-definition hidden">
+                            <div class="flashcard-label">Definition</div>
+                            <div class="flashcard-text" id="definition-text">
+                                Definition 1
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flashcard-controls">
+                        <button id="flip-btn" class="flip-btn">Flip card</button>
+                    </div>
 
                     <div class="nav-buttons">
                         <button id="prev-btn">← Previous</button>
@@ -45,59 +94,47 @@
                     <div class="subset-header">
                         <h3>STUDY BY SUBSET</h3>
                         <button class="subset-menu-btn">⋮</button>
-                        <!-- Subset Options Modal -->
                         <div id="subsetOptionsModal" class="subset-modal hidden">
                             <div class="subset-modal-content">
-                                <button class="subset-modal-item" id="renameSubset">Rename</button>
-                                <button class="subset-modal-item" id="editSubset">Edit Subset</button>
-                                <button class="subset-modal-item delete" id="deleteSubset">Delete Subset</button>
+                                <button class="subset-modal-item" id="renameSubset">
+                                    Rename
+                                </button>
+                                <button class="subset-modal-item" id="editSubset">
+                                    Edit Subset
+                                </button>
+                                <button
+                                    class="subset-modal-item delete"
+                                    id="deleteSubset"
+                                >
+                                    Delete Subset
+                                </button>
                             </div>
                         </div>
                     </div>
 
                     <div class="subset-card">
-                        <span>Not confident</span>
-                        <span>4 TERMS</span>
+                        <span class="subset-title">Not confident</span>
+                        <span class="subset-count">4 TERMS</span>
                         <button class="subset-card-menu-btn">⋮</button>
                     </div>
 
                     <div class="subset-card">
-                        <span>Semi-confident</span>
-                        <span>4 TERMS</span>
+                        <span class="subset-title">Semi-confident</span>
+                        <span class="subset-count">4 TERMS</span>
                         <button class="subset-card-menu-btn">⋮</button>
                     </div>
 
                     <div class="subset-card">
-                        <span>Confident</span>
-                        <span>4 TERMS</span>
+                        <span class="subset-title">Confident</span>
+                        <span class="subset-count">4 TERMS</span>
                         <button class="subset-card-menu-btn">⋮</button>
                     </div>
 
                     <div class="add-category">Add new category</div>
                 </aside>
-
             </div>
         </div>
 
-        <script src="../scripts/study.js" defer></script>
-        <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const subsetMenuBtn = document.querySelector('.subset-menu-btn');
-            const subsetModal = document.getElementById('subsetOptionsModal');
-
-            // open/close modal
-            subsetMenuBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                subsetModal.classList.toggle('hidden');
-            });
-
-            // close when clicking away
-            document.addEventListener('click', (e) => {
-                if (!subsetModal.contains(e.target) && !subsetMenuBtn.contains(e.target)) {
-                    subsetModal.classList.add('hidden');
-                }
-            });
-        });
-        </script>
+        <script type="module" src="../scripts/study.js"></script>
     </body>
 </html>

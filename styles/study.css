@@ -19,8 +19,8 @@ body {
 }
 
 .title {
-font-size: 22px;
-font-weight: 600;
+    font-size: 22px;
+    font-weight: 600;
 }
 
 .set-name {
@@ -44,6 +44,12 @@ font-weight: 600;
 .restart-btn {
     background: transparent;
     border: 1px solid gray;
+}
+
+.exit-btn {
+    background: transparent;
+    border: 1px solid #d9534f;
+    color: #d9534f;
 }
 
 .progress-section {
@@ -78,45 +84,77 @@ font-weight: 600;
 .flashcard {
     background: white;
     border-radius: 14px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.1);
-    padding: 40px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    padding: 32px;
     flex: 1;
     position: relative;
     text-align: center;
 }
 
-.flashcard-text {
-    font-size: 28px;
-    margin-top: 80px;
+.flashcard-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.dropdown-btn, .delete-btn, .edit-btn {
-    position: absolute;
-    top: 20px;
+.flashcard-actions {
+    display: flex;
+    gap: 8px;
+    position: relative;
+}
+
+.dropdown-btn,
+.delete-btn,
+.edit-btn {
     background: white;
     border: 1px solid #ccc;
     border-radius: 6px;
     padding: 6px 10px;
     cursor: pointer;
+    font-size: 13px;
 }
 
-.dropdown-btn { 
-    right: 90px; 
+.flashcard-content {
+    margin: 150px 0px;
 }
 
-.delete-btn { 
-    right: 50px; 
+.flashcard-side {
+    text-align: center;
 }
 
-.edit-btn { 
-    right: 15px; 
+.flashcard-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.7;
+    margin-bottom: 6px;
+}
+
+.flashcard-text {
+    font-size: 28px;
+    margin-top: 0;
+}
+
+.flashcard-controls {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.flip-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid #aaa;
+    background: #f5f5f5;
+    cursor: pointer;
+    font-size: 14px;
 }
 
 .nav-buttons {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 100px;
+    margin-top: 40px;
     gap: 20px;
 }
 
@@ -130,12 +168,12 @@ font-weight: 600;
 
 .add-category {
     text-align: center;
-    margin-top: 15px;
+    margin-top: 16px;
+    font-size: 14px;
     color: #777;
     cursor: pointer;
 }
 
-/* subset panel styles */
 .subset-panel {
     background: #fff;
     border-radius: 12px;
@@ -174,7 +212,7 @@ font-weight: 600;
     justify-content: space-between;
     align-items: center;
     position: relative;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
     font-size: 15px;
     gap: 10px;
 }
@@ -201,15 +239,6 @@ font-weight: 600;
     cursor: pointer;
 }
 
-.add-category {
-    margin-top: 16px;
-    font-size: 14px;
-    color: #777;
-    cursor: pointer;
-    text-align: center;
-}
-
-/* subset modal */
 .subset-modal {
     position: absolute;
     top: 40px;
@@ -217,17 +246,20 @@ font-weight: 600;
     background: white;
     border: 1px solid #ccc;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     width: 180px;
     z-index: 999;
 }
+
 .hidden {
     display: none;
 }
+
 .subset-modal-content {
     display: flex;
     flex-direction: column;
 }
+
 .subset-modal-item {
     padding: 12px;
     font-size: 14px;
@@ -236,10 +268,173 @@ font-weight: 600;
     background: white;
     cursor: pointer;
 }
+
 .subset-modal-item:hover {
     background: #f3f3f3;
 }
+
 .subset-modal-item.delete {
     color: red;
     font-weight: 600;
+}
+
+.subset-title {
+    flex: 1;
+}
+
+.subset-count {
+    font-size: 13px;
+    color: #777;
+    margin-right: 4px;
+}
+
+.side-toggle {
+    display: flex;
+    gap: 8px;
+}
+
+.side-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.side-btn.active {
+    border-color: #2f6ed8;
+    color: #2f6ed8;
+}
+
+.add-to-modal {
+    position: absolute;
+    top: 38px;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    width: 210px;
+    z-index: 1000;
+}
+
+.add-to-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.add-to-item:hover {
+    background: #f3f3f3;
+}
+
+.success-popup {
+    position: fixed;
+    top: 95px;
+    right: 40px;
+    background: #e7f7e7;
+    border: 2px solid #2f9e44;
+    padding: 14px 18px;
+    width: 360px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: 0.35s ease;
+    font-size: 15px;
+    z-index: 1500;
+}
+
+.success-popup.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.success-popup .icon {
+    font-size: 22px;
+    color: #2f9e44;
+    margin-top: 2px;
+}
+
+.success-popup .text strong {
+    font-weight: 600;
+}
+
+.warning-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1600;
+}
+
+.warning-modal {
+    background: white;
+    border-radius: 14px;
+    padding: 24px 26px;
+    width: 420px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+.warning-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.warning-header h3 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.warning-icon {
+    font-size: 26px;
+}
+
+.warning-text {
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0 0 20px;
+    color: #333;
+}
+
+.warning-text .highlight {
+    font-weight: 600;
+}
+
+.warning-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.warning-cancel-btn {
+    background: transparent;
+    border: none;
+    color: #666;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 6px 10px;
+}
+
+.warning-leave-btn {
+    background: #4a82f9;
+    color: white;
+    font-size: 15px;
+    padding: 7px 18px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
 }
