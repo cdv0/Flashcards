@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Flashcards</title>
+    <link rel="stylesheet" href="../styles/view.css" />
+</head>
+<body>
+    <!-- Success Popup -->
+    <div id="successPopup" class="success-popup">
+        <div class="icon">✔</div>
+        <div class="text">
+            <strong>Success</strong><br>
+            <span id="successMsg"></span>
+        </div>
+    </div>
+
+    <header class="header">
+        <h1>CECS 448 Midterm 2</h1>
+        <div class="pill">CECS 448</div>
+        <span class="public-tag">Public</span>
+        
+        <!-- DROPDOWN MOVED HERE -->
+        <div class="dropdown-container">
+            <button class="menu-btn small-menu">⋮</button>
+            <div class="dropdown-menu hidden">
+                <div class="dropdown-item">Change section</div>
+                <div class="dropdown-item">Edit details</div>
+                <div class="dropdown-item">Edit set</div>
+                <div class="dropdown-item delete">Delete set 🗑️</div>
+            </div>
+        </div>
+
+        <button class="study-btn">Study</button>
+    </header>
+
+    <section class="flashcard-view">
+
+        <div class="flashcard">
+
+
+            <!-- TOP BUTTONS INSIDE CARD -->
+            <div class="flashcard-top-buttons">
+                <div class="dropdown-container add-to-container">
+                    <button class="add-btn">Add to… ▼</button>
+                    <div class="dropdown-menu add-to-dropdown hidden">
+                        <div class="dropdown-item">Not Confident</div>
+                        <div class="dropdown-item">Semi-Confident</div>
+                        <div class="dropdown-item">Confident</div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item add-category">+ Add New Category</div>
+                    </div>
+                </div>
+
+                <button class="icon-btn">✎</button>
+                <button class="icon-btn">🗑️</button>
+            </div>
+
+            <!-- TERM SHOULD BE INSIDE THE CARD -->
+            <p id="flashcard-term">Term</p>
+
+        </div>
+
+        <div class="flashcard-controls">
+
+            <button id="prev-btn" class="nav-btn">← Previous</button>
+            <span id="counter">1 of 2</span>
+            <button id="next-btn" class="nav-btn">Next →</button>
+            <button id="shuffle-btn" class="nav-btn shuffle">Shuffle</button>
+
+        </div>
+    </section>
+
+
+    <section class="terms">
+
+        <div class="terms-header">
+            <h2>Terms in this set <span class="term-count">2 terms</span></h2>
+            <button class="filter-btn">Filter ▼</button>
+        </div>
+
+        <div class="term-item editable">
+            <div class="row">
+                <label>Term</label>
+                <input type="text" value="Usability" />
+            </div>
+
+            <div class="row">
+                <label>Definition</label>
+                <textarea>Usability is the ...</textarea>
+            </div>
+        </div>
+
+        <div class="term-item">
+            <div class="row">
+                <label class="static-label">Usability</label>
+            </div>
+
+            <div class="row">
+                <p class="static-definition">
+                    The ease with which a user can use a product, or software to perform the core tasks...
+                </p>
+            </div>
+        </div>
+
+        <p class="end-of-set">— END OF SET —</p>
+    </section>
+
+    <script type="module" src="../scripts/view.js"></script>
+</body>
+</html>
